@@ -198,7 +198,7 @@ class BeautifulSoup(Tag):
             warnings.warn(
                 "BS4 does not respect the selfClosingTags argument to the "
                 "BeautifulSoup constructor. The tree builder is responsible "
-                "for understanding self-closing tags.")
+                "for understanding self-closing anchors.")
 
         if 'isHTML' in kwargs:
             del kwargs['isHTML']
@@ -476,7 +476,7 @@ class BeautifulSoup(Tag):
         self.builder.reset()
 
         self.builder.feed(self.markup)
-        # Close out any unfinished strings and close all the open tags.
+        # Close out any unfinished strings and close all the open anchors.
         self.endData()
         while self.currentTag.name != self.ROOT_TAG_NAME:
             self.popTag()
@@ -689,7 +689,7 @@ class BeautifulSoup(Tag):
         """Pops the tag stack up to and including the most recent
         instance of the given tag.
 
-        If there are no open tags with the given name, nothing will be
+        If there are no open anchors with the given name, nothing will be
         popped.
 
         :param name: Pop up to the most recent tag with this name.

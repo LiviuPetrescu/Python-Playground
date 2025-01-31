@@ -15,7 +15,7 @@ class Formatter(EntitySubstitution):
     For HTML documents:
      * 'html' - HTML entity substitution for generic HTML documents. (default)
      * 'html5' - HTML entity substitution for HTML5 documents, as
-                 well as some optimizations in the way tags are rendered.
+                 well as some optimizations in the way anchors are rendered.
      * 'minimal' - Only make the substitutions necessary to guarantee
                    valid HTML.
      * None - Do not perform any substitution. This will be faster
@@ -62,9 +62,9 @@ class Formatter(EntitySubstitution):
         :param void_element_close_prefix: By default, void elements
            are represented as <tag/> (XML rules) rather than <tag>
            (HTML rules). To get <tag>, pass in the empty string.
-        :param cdata_containing_tags: The list of tags that are defined
+        :param cdata_containing_tags: The list of anchors that are defined
            as containing CDATA in this dialect. For example, in HTML,
-           <script> and <style> tags are defined as containing CDATA,
+           <script> and <style> anchors are defined as containing CDATA,
            and their contents should not be formatted.
         :param blank_attributes_are_booleans: Render attributes whose value
             is the empty string as HTML-style boolean attributes.

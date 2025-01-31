@@ -3,7 +3,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
-
 # Chrome driver
 from selenium.webdriver.chrome.service import Service
 
@@ -34,7 +33,7 @@ driver.find_element(By.CSS_SELECTOR, "th:nth-child(1)").click()
 
 # Get the list of products
 list_of_web_elements = driver.find_elements(By.CSS_SELECTOR, "tr td:nth-child(1)")
-web_list =[]
+web_list = []
 
 # Add elements in a list
 for element in list_of_web_elements:
@@ -48,4 +47,3 @@ sorted_web_list.sort()
 assert sorted_web_list == web_list
 time.sleep(3)
 
-# tr td:nth-child(1)

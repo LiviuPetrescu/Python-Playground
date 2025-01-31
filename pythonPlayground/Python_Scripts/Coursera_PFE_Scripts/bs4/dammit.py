@@ -526,7 +526,7 @@ class UnicodeDammit:
     equivalents."""
 
     # This dictionary maps commonly seen values for "charset" in HTML
-    # meta tags to the corresponding Python codec names. It only covers
+    # meta anchors to the corresponding Python codec names. It only covers
     # values that aren't in Python's aliases and can't be determined
     # by the heuristics in find_codec.
     CHARSET_ALIASES = {"macintosh": "mac-roman",

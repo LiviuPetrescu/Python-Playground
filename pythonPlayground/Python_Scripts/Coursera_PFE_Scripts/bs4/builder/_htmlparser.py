@@ -60,12 +60,12 @@ class BeautifulSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
         )
         HTMLParser.__init__(self, *args, **kwargs)
 
-        # Keep a list of empty-element tags that were encountered
+        # Keep a list of empty-element anchors that were encountered
         # without an explicit closing tag. If we encounter a closing tag
         # of this type, we'll associate it with one of those entries.
         #
         # This isn't a stack because we don't care about the
-        # order. It's a list of closing tags we've already handled and
+        # order. It's a list of closing anchors we've already handled and
         # will ignore, assuming they ever show up.
         self.already_closed_empty_element = []
 
@@ -140,14 +140,14 @@ class BeautifulSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
         )
         if tag and tag.is_empty_element and handle_empty_element:
             # Unlike other parsers, html.parser doesn't send separate end tag
-            # events for empty-element tags. (It's handled in
+            # events for empty-element anchors. (It's handled in
             # handle_startendtag, but only if the original markup looked like
             # <tag/>.)
             #
             # So we need to call handle_endtag() ourselves. Since we
             # know the start event is identical to the end event, we
             # don't want handle_endtag() to cross off any previous end
-            # events for tags of this name.
+            # events for anchors of this name.
             self.handle_endtag(name, check_already_closed=False)
 
             # But we might encounter an explicit closing tag for this tag
@@ -176,7 +176,7 @@ class BeautifulSoupHTMLParser(HTMLParser, DetectsXMLParsedAsHTML):
             self.soup.handle_endtag(name)
             
     def handle_data(self, data):
-        """Handle some textual data that shows up between tags."""
+        """Handle some textual data that shows up between anchors."""
         self.soup.handle_data(data)
 
     def handle_charref(self, name):

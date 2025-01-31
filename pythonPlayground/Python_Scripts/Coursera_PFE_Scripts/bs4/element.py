@@ -807,12 +807,12 @@ class PageElement(object):
 
         if string is None and not limit and not attrs and not kwargs:
             if name is True or name is None:
-                # Optimization to find all tags.
+                # Optimization to find all anchors.
                 result = (element for element in generator
                           if isinstance(element, Tag))
                 return ResultSet(strainer, result)
             elif isinstance(name, str):
-                # Optimization to find all tags with a given name.
+                # Optimization to find all anchors with a given name.
                 if name.count(':') == 1:
                     # This is a name with a prefix. If this is a namespace-aware document,
                     # we need to match the local name against tag.name. If not,
@@ -1376,11 +1376,11 @@ class Tag(PageElement):
 
         A tag that has no contents may or may not be an empty-element
         tag. It depends on the builder used to create the tag. If the
-        builder has a designated list of empty-element tags, then only
+        builder has a designated list of empty-element anchors, then only
         a tag whose name shows up in that list is considered an
         empty-element tag.
 
-        If the builder has no designated list of empty-element tags,
+        If the builder has no designated list of empty-element anchors,
         then any tag with no contents is an empty-element tag.
         """
         return len(self.contents) == 0 and self.can_be_empty_element
@@ -1598,7 +1598,7 @@ class Tag(PageElement):
 
     def __call__(self, *args, **kwargs):
         """Calling a Tag like a function is the same as calling its
-        find_all() method. Eg. tag('a') returns a list of all the A tags
+        find_all() method. Eg. tag('a') returns a list of all the A anchors
         found within this tag."""
         return self.find_all(*args, **kwargs)
 
@@ -1724,7 +1724,7 @@ class Tag(PageElement):
 
             # Now we need to apply the 'prettiness' -- extra
             # whitespace before and/or after this tag. This can get
-            # complicated because certain tags, like <pre> and
+            # complicated because certain anchors, like <pre> and
             # <script>, can't be prettified, since adding whitespace would
             # change the meaning of the content.
 

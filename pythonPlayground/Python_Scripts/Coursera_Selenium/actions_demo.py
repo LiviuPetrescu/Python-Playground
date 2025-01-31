@@ -4,7 +4,6 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 
-
 # Chrome driver
 from selenium.webdriver.chrome.service import Service
 
@@ -24,7 +23,7 @@ driver.maximize_window()
 action = ActionChains(driver)
 
 # Hover over the "Mouse Hover "element
-action.move_to_element(driver.find_element(By.ID , 'mousehover')).perform()
+action.move_to_element(driver.find_element(By.ID, "mousehover")).perform()
 
 # Right-click on the element
 action.context_click(driver.find_element(By.LINK_TEXT, "Top")).perform()

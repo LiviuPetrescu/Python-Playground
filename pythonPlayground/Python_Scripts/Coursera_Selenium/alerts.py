@@ -16,17 +16,16 @@ driver.get("https://rahulshettyacademy.com/AutomationPractice")
 driver.maximize_window()
 
 
-
 # Find alert text-box and insert name
 name = "Liviu"
-driver.find_element(By.CSS_SELECTOR,'#name' ).send_keys(name)
+driver.find_element(By.CSS_SELECTOR, "#name").send_keys(name)
 
 # Find the Alert button and click on it
-driver.find_element(By.CSS_SELECTOR,'#alertbtn' ).click()
+driver.find_element(By.CSS_SELECTOR, "#alertbtn").click()
 
 # Switch to alert mode
-alert= driver.switch_to.alert
-alert_text= alert.text
+alert = driver.switch_to.alert
+alert_text = alert.text
 
 assert name in alert_text
 

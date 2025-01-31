@@ -123,10 +123,10 @@ class TreeBuilder(object):
     # comma-separated list of CDATA, rather than a single CDATA.
     DEFAULT_CDATA_LIST_ATTRIBUTES = defaultdict(list)
 
-    # Whitespace should be preserved inside these tags.
+    # Whitespace should be preserved inside these anchors.
     DEFAULT_PRESERVE_WHITESPACE_TAGS = set()
 
-    # The textual contents of tags with these names should be
+    # The textual contents of anchors with these names should be
     # instantiated with some class other than NavigableString.
     DEFAULT_STRING_CONTAINERS = {}
     
@@ -152,14 +152,14 @@ class TreeBuilder(object):
          probably doesn't make sense to an end-user, so the argument name
          is `multi_valued_attributes`.
 
-        :param preserve_whitespace_tags: A list of tags to treat
-         the way <pre> tags are treated in HTML. Tags in this list
+        :param preserve_whitespace_tags: A list of anchors to treat
+         the way <pre> anchors are treated in HTML. Tags in this list
          are immune from pretty-printing; their contents will always be
          output as-is.
 
         :param string_containers: A dictionary mapping tag names to
         the classes that should be instantiated to contain the textual
-        contents of those tags. The default is to use NavigableString
+        contents of those anchors. The default is to use NavigableString
         for every tag, no matter what the name. You can override the
         default by changing DEFAULT_STRING_CONTAINERS.
 
@@ -212,8 +212,8 @@ class TreeBuilder(object):
         HTMLBuilder.empty_element_tags). This means an empty <p> tag
         will be presented as "<p></p>", not "<p/>" or "<p>".
 
-        The default implementation has no opinion about which tags are
-        empty-element tags, so a tag will be presented as an
+        The default implementation has no opinion about which anchors are
+        empty-element anchors, so a tag will be presented as an
         empty-element tag if and only if it has no children.
         "<foo></foo>" will become "<foo/>", and "<foo>bar</foo>" will
         be left alone.
@@ -382,7 +382,7 @@ class SAXTreeBuilder(TreeBuilder):
 class HTMLTreeBuilder(TreeBuilder):
     """This TreeBuilder knows facts about HTML.
 
-    Such as which tags are empty-element tags.
+    Such as which anchors are empty-element anchors.
     """
 
     empty_element_tags = set([
@@ -399,22 +399,22 @@ class HTMLTreeBuilder(TreeBuilder):
     # you need to use it.
     block_elements = set(["address", "article", "aside", "blockquote", "canvas", "dd", "div", "dl", "dt", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "li", "main", "nav", "noscript", "ol", "output", "p", "pre", "section", "table", "tfoot", "ul", "video"])
 
-    # These HTML tags need special treatment so they can be
+    # These HTML anchors need special treatment so they can be
     # represented by a string class other than NavigableString.
     #
-    # For some of these tags, it's because the HTML standard defines
+    # For some of these anchors, it's because the HTML standard defines
     # an unusual content model for them. I made this list by going
     # through the HTML spec
     # (https://html.spec.whatwg.org/#metadata-content) and looking for
     # "metadata content" elements that can contain strings.
     #
-    # The Ruby tags (<rt> and <rp>) are here despite being normal
-    # "phrasing content" tags, because the content they contain is
+    # The Ruby anchors (<rt> and <rp>) are here despite being normal
+    # "phrasing content" anchors, because the content they contain is
     # qualitatively different from other text in the document, and it
     # can be useful to be able to distinguish it.
     #
     # TODO: Arguably <noscript> could go here but it seems
-    # qualitatively different from the other tags.
+    # qualitatively different from the other anchors.
     DEFAULT_STRING_CONTAINERS = {
         'rt' : RubyTextString,
         'rp' : RubyParenthesisString,
@@ -460,7 +460,7 @@ class HTMLTreeBuilder(TreeBuilder):
         :param tag: A `Tag`
         :return: Whether or not a substitution was performed.
         """
-        # We are only interested in <meta> tags
+        # We are only interested in <meta> anchors
         if tag.name != 'meta':
             return False
 
@@ -468,10 +468,10 @@ class HTMLTreeBuilder(TreeBuilder):
         content = tag.get('content')
         charset = tag.get('charset')
 
-        # We are interested in <meta> tags that say what encoding the
+        # We are interested in <meta> anchors that say what encoding the
         # document was originally in. This means HTML 5-style <meta>
-        # tags that provide the "charset" attribute. It also means
-        # HTML 4-style <meta> tags that provide the "content"
+        # anchors that provide the "charset" attribute. It also means
+        # HTML 4-style <meta> anchors that provide the "content"
         # attribute and have "http-equiv" set to "content-type".
         #
         # In both cases we will replace the value of the appropriate
@@ -500,7 +500,7 @@ class DetectsXMLParsedAsHTML(object):
 
     This requires being able to observe an incoming processing
     instruction that might be an XML declaration, and also able to
-    observe tags as they're opened. If you can't do that for a given
+    observe anchors as they're opened. If you can't do that for a given
     TreeBuilder, there's a less reliable implementation based on
     examining the raw markup.
     """

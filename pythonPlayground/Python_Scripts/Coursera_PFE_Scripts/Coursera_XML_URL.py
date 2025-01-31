@@ -1,8 +1,10 @@
 import urllib.request
 import xml.etree.ElementTree as ET
 
-#  folosim Element Tree pentru a utiliza datele returnate de XML
-#  folosim urllib request ca la oricare alt tip de adresa
+"""
+In this script Element Tree is used to manipulate XML content
+"""
+
 
 url = input('Enter location: ')
 if len(url) < 1 :
@@ -10,24 +12,23 @@ if len(url) < 1 :
 
 print('Retrieving', url)
 
-# deschidem URL-ul
+# Open URL-ul
 uh = urllib.request.urlopen(url)
 
-#  citim raspunsul intr-o forma mai bruta (intreg continultul documentului XML)
+#  Read the data(entire XML document)
 data = uh.read()
-print("PRINTEZ DATA:", data)
+print("print data:", data)
 print('Retrieved',len(data),'characters')
 
-# tree este un obiect din clasa xml element tree
+# 'tree' is an object from XML element tree class
 tree = ET.fromstring(data)
 
-# salvam intr-o lista toate atributele cu numele "count"
+# Save in a list all attributes with "count" name
 counts = tree.findall('.//count')
 nums = list()
 
-# parcurgem lista si convertim textul din atributul "count" in int
+# Iterate through the list and cast "count" as int
 for result in counts:
-    # Debug print the data :)
     nums.append(int(result.text))
 print('Count:', len(nums))
 print('Sum:', sum(nums))

@@ -9,6 +9,8 @@
 #     line = line.rstrip()
 #     line= line.upper()
 #     print(line)
+
+
 # ////////////////////////////////////////////////////////////////////////////////////////////////////
 # EXAMPLE 2 print only the unique words form a FILE and sort them
 # fname = input("Enter file name: ")
@@ -29,6 +31,8 @@
 # print(lst)
 # for ele  in range(len(lst)):
 #     print(ele,lst[ele])
+
+
 # ///////////////////////////////////////////////////////////////////////////////////////////////////////
 # EXAMPLE 3 Iterate through a list of e-mail and find the sender with the most emails
 # fname = input("Enter file name: ")
@@ -54,6 +58,7 @@
 #         sender= key
 # print(sender,biggest)
 # print(sender_dict)
+
 # /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #  EXAMPLE 4 Iterate through a list of e-mails and find the hour with the most emails
 # fname = input("Enter file name: ")
@@ -76,6 +81,7 @@
 # srtlst= sorted(hour_list)
 # for value, key in srtlst:
 #     print(value,key)
+
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 # EXAMPLE 5 Iterate through a file and get the values  for a specific attribute and calculate the average
 # Use the file name mbox-short.txt as the file name
@@ -92,25 +98,26 @@
 #     counter= counter+1
 # average= total/counter
 # print("Average spam confidence: ",average)
+
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-# EXAMPLE 6 Importam pachetul "re" care ne ajuta sa cautam foarte specific
-import re
-number_sum=0
-try:
-    fh = open("all_numbers.txt")
-except:
-    print("Fisierul nu mai exista")
-    quit()
-
-
-for line in fh:
-    line= line.rstrip()
-    number=re.findall("[0-9]+",line)
-    # If on the current line we don't have any number we will receive an empty list and the IF will be executed
-    if len(number)<1:
-        continue
-    else:
-        for element in number:
-            number_sum = number_sum+int(element)
-print(number_sum)
-# http://data.pr4e.org/intro-short.txt
+# EXAMPLE 6 Import "re" package which helps for a very specific search
+# import re
+# number_sum=0
+# try:
+#     fh = open("all_numbers.txt")
+# except:
+#     print("File doesn't exist")
+#     quit()
+#
+#
+# for line in fh:
+#     line= line.rstrip()
+#     number=re.findall("[0-9]+",line)
+#     # If on the current line we don't have any number, we will receive an empty list and the IF will be executed
+#     if len(number)<1:
+#         continue
+#     else:
+#         for element in number:
+#             number_sum = number_sum+int(element)
+# print(number_sum)
+# # http://data.pr4e.org/intro-short.txt

@@ -16,7 +16,9 @@ driver.get("https://rahulshettyacademy.com/dropdownsPractise/")
 driver.maximize_window()
 
 # Static Dropdown (by visible text, index or value)
-static_dropdown = Select(driver.find_element(By.ID, "ctl00_mainContent_DropDownListCurrency"))
+static_dropdown = Select(
+    driver.find_element(By.ID, "ctl00_mainContent_DropDownListCurrency")
+)
 
 # Select 'USD' currency using visible text
 static_dropdown.select_by_visible_text("USD")
@@ -42,8 +44,7 @@ for country in countries:
 
 # Get the value that was inserted using get_attribute
 check_inserted_value = driver.find_element(By.ID, "autosuggest").get_attribute("value")
-assert check_inserted_value =="India"
+assert check_inserted_value == "India"
 
 delay = 5
 time.sleep(delay)
-
